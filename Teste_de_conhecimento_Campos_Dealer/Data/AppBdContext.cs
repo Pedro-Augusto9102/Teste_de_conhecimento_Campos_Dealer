@@ -11,5 +11,7 @@ namespace Teste_de_conhecimento_Campos_Dealer.Data
         }
 
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Produto> Produto { get; set; }
+        public DbSet<Venda> Venda { get; set; }
     }
 }
