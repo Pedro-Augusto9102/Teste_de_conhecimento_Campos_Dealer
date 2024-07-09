@@ -5,6 +5,12 @@
 }
 @model List<Teste_de_conhecimento_Campos_Dealer.Models.Entities.Student>
 <h1>Students</h1>
+@if(TempData["AlertMessage"] is not null)
+{
+    <div class="alert alert-success">
+        <strong>Sucesso!</strong>@TempData["AlertMessage"]
+    </div>
+}
 
 <table class="table">
     <thead>

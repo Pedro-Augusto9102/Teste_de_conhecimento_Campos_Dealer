@@ -73,6 +73,7 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
             {
                 bdContext.Students.Remove(viewModel);
                 await bdContext.SaveChangesAsync();
+                TempData["AlertMessage"] = "Operação realizada com Sucesso";
             }
             return RedirectToAction("List", "Student");
         }
