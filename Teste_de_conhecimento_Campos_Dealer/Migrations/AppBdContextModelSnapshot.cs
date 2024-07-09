@@ -22,13 +22,13 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Student", b =>
+            modelBuilder.Entity("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Cliente", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -36,16 +36,9 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Subscribed")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Clientes");
                 });
 #pragma warning restore 612, 618
         }

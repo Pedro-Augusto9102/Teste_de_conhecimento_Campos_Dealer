@@ -10,6 +10,6 @@ namespace Teste_de_conhecimento_Campos_Dealer.Data
             
         }
 
-        public DbSet<Student> Students { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
     }
 }

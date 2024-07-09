@@ -12,7 +12,7 @@ using Teste_de_conhecimento_Campos_Dealer.Data;
 namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 {
     [DbContext(typeof(AppBdContext))]
-    [Migration("20240708234021_Initial Migration")]
+    [Migration("20240709164908_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -25,13 +25,13 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Student", b =>
+            modelBuilder.Entity("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Cliente", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -39,16 +39,9 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Subscribed")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Clientes");
                 });
 #pragma warning restore 612, 618
         }

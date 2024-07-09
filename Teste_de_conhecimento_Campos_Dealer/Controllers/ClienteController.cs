@@ -7,10 +7,10 @@ using Teste_de_conhecimento_Campos_Dealer.Models.Entities;
 
 namespace Teste_de_conhecimento_Campos_Dealer.Controllers
 {
-    public class StudentController : Controller
+    public class ClienteController : Controller
     {
         private readonly AppBdContext bdContext;
-        public StudentController(AppBdContext bdContext) 
+        public ClienteController(AppBdContext bdContext) 
         {
             this.bdContext = bdContext;
         }
@@ -21,16 +21,14 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddStudentViewModel viewModel)
+        public async Task<IActionResult> Add(AddClienteViewModel viewModel)
         {
-            var student = new Student
+            var cliente = new Cliente
             {
                 Name = viewModel.Name,
-                Email = viewModel.Email,
-                Phone = viewModel.Phone,
-                Subscribed = viewModel.Subscribed
+                City = viewModel.City,
             };
-            await bdContext.Students.AddAsync(student);
+            await bdContext.Clientes.AddAsync(cliente);
             await bdContext.SaveChangesAsync();
             return View();
         }
@@ -38,44 +36,42 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var students = await bdContext.Students.ToListAsync();
-            return View(students);
+            var cliente = await bdContext.Clientes.ToListAsync();
+            return View(cliente);
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            var student = await bdContext.Students.FindAsync(id);
-            return View(student);
+            var cliente = await bdContext.Clientes.FindAsync(id);
+            return View(cliente);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Student viewModel)
+        public async Task<IActionResult> Edit(Cliente viewModel)
         {
-            var student = await bdContext.Students.FindAsync(viewModel.Id);
+            var student = await bdContext.Clientes.FindAsync(viewModel.Id);
             if(student is not null)
             {
                 student.Name = viewModel.Name;
-                student.Email = viewModel.Email;
-                student.Phone = viewModel.Phone;
-                student.Subscribed = viewModel.Subscribed;
+                student.City = viewModel.City;
                 await bdContext.SaveChangesAsync();
             }
-            return RedirectToAction("List", "Student");
+            return RedirectToAction("List", "Cliente");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(Student viewModel)
+        public async Task<IActionResult> Delete(Cliente viewModel)
         {
-            var student = await bdContext.Students.AsNoTracking().FirstOrDefaultAsync(x => x.Id == viewModel.Id);  
+            var cliente = await bdContext.Clientes.AsNoTracking().FirstOrDefaultAsync(x => x.Id == viewModel.Id);  
             
-            if (student is not null)
+            if (cliente is not null)
             {
-                bdContext.Students.Remove(viewModel);
+                bdContext.Clientes.Remove(viewModel);
                 await bdContext.SaveChangesAsync();
                 TempData["AlertMessage"] = "Operação realizada com Sucesso";
             }
-            return RedirectToAction("List", "Student");
+            return RedirectToAction("List", "Cliente");
         }
     }
 }
