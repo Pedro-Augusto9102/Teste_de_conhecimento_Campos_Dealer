@@ -4,10 +4,9 @@
 @{
 }
 
+@model Teste_de_conhecimento_Campos_Dealer.Models.Entities.Produto
 
-@model Teste_de_conhecimento_Campos_Dealer.Models.Entities.Cliente
-
-<h1>Editar Cliente</h1>
+<h1>Editar Produto</h1>
 
 @if (Model is null)
 {
@@ -22,18 +21,18 @@ else
         </div>
 
         <div class="mt-3">
-            <label class="form-label">Name</label>
-            <input type="text" class="form-control" asp-for="Name" />
+            <label class="form-label">Descrição</label>
+            <input type="text" class="form-control" asp-for="dscProduto" />
         </div>
 
         <div class="mt-3">
-            <label class="form-label">Cidade</label>
-            <input type="text" class="form-control" asp-for="City" />
+            <label class="form-label">Valor</label>
+            <input type="number" class="form-control" asp-for="vlrUnitário" />
         </div>
 
         <div class="mt-3">
             <button type="submit" class="btn btn-primary">Salvar</button>
-            <button type="submit" class="btn btn-danger ms-3" asp-action="Delete" asp-controller="Cliente">Deletar</button>
+            <button type="submit" class="btn btn-danger ms-3" asp-action="Delete" asp-controller="Produto">Deletar</button>
         </div>
     </form>
 }
