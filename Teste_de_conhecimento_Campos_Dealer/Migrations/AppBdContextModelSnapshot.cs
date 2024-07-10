@@ -68,21 +68,13 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("clienteId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("dathVenda")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("idCliente")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("idClienteId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("idProduto")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("produtoId")
+                    b.Property<Guid>("idProdutoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("qtdVenda")
@@ -96,30 +88,30 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("clienteId");
+                    b.HasIndex("idClienteId");
 
-                    b.HasIndex("produtoId");
+                    b.HasIndex("idProdutoId");
 
                     b.ToTable("Venda");
                 });
 
             modelBuilder.Entity("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Venda", b =>
                 {
-                    b.HasOne("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Cliente", "cliente")
+                    b.HasOne("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Cliente", "idCliente")
                         .WithMany()
-                        .HasForeignKey("clienteId")
+                        .HasForeignKey("idClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Produto", "produto")
+                    b.HasOne("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Produto", "idProduto")
                         .WithMany()
-                        .HasForeignKey("produtoId")
+                        .HasForeignKey("idProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("cliente");
+                    b.Navigation("idCliente");
 
-                    b.Navigation("produto");
+                    b.Navigation("idProduto");
                 });
 #pragma warning restore 612, 618
         }

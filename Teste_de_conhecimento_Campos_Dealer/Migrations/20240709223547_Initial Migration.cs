@@ -43,10 +43,8 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    idCliente = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    clienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    idProduto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    produtoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    idClienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    idProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     qtdVenda = table.Column<int>(type: "int", nullable: false),
                     vlrUnitarioVenda = table.Column<int>(type: "int", nullable: false),
                     dathVenda = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -56,28 +54,28 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                 {
                     table.PrimaryKey("PK_Venda", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Venda_Clientes_clienteId",
-                        column: x => x.clienteId,
+                        name: "FK_Venda_Clientes_idClienteId",
+                        column: x => x.idClienteId,
                         principalTable: "Clientes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Venda_Produto_produtoId",
-                        column: x => x.produtoId,
+                        name: "FK_Venda_Produto_idProdutoId",
+                        column: x => x.idProdutoId,
                         principalTable: "Produto",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Venda_clienteId",
+                name: "IX_Venda_idClienteId",
                 table: "Venda",
-                column: "clienteId");
+                column: "idClienteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Venda_produtoId",
+                name: "IX_Venda_idProdutoId",
                 table: "Venda",
-                column: "produtoId");
+                column: "idProdutoId");
         }
 
         /// <inheritdoc />
