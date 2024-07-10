@@ -39,6 +39,19 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Search(Guid id)
+        {
+
+            var produto = await bdContext.Produto.FindAsync(id);
+
+            if (produto is not null)
+            {
+                return new JsonResult(Ok(produto));
+            }
+            return RedirectToAction("List", "Cliente");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
             var produto = await bdContext.Produto.FindAsync(id);

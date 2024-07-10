@@ -20,6 +20,8 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
             dynamic mymodel = new ExpandoObject();
             mymodel.cliente = await bdContext.Clientes.ToListAsync();
             mymodel.produto = await bdContext.Produto.ToListAsync();
+            AddVendaViewModel addVendaViewModel = new AddVendaViewModel();
+            mymodel.venda = addVendaViewModel;
             return View(mymodel);
         }
 
@@ -28,11 +30,11 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
         {
             var venda = new Venda
             {
-                idCliente = viewModel.idCliente,
-                idProduto = viewModel.idProduto,
+                idClienteId = viewModel.idClienteId,
+                idProdutoId = viewModel.idProdutoId,
                 qtdVenda = viewModel.qtdVenda,
                 vlrUnitarioVenda = viewModel.vlrUnitarioVenda,
-                dathVenda = viewModel.dathVenda,
+                dathVenda = DateTime.Now,
                 vlrTotalVenda = viewModel.vlrTotalVenda,
             };
             await bdContext.Venda.AddAsync(venda);

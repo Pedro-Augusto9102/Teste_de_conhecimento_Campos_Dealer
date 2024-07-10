@@ -1,17 +1,85 @@
-﻿@using Teste_de_conhecimento_Campos_Dealer.Models.Entities
+﻿@using Teste_de_conhecimento_Campos_Dealer.Models
+@using Teste_de_conhecimento_Campos_Dealer.Models.Entities
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
+
 @model dynamic
 
+
 <h1>Adicionar Vendas</h1>
-        @foreach (Cliente cliente in Model.cliente)
-        {
-            <p>@cliente.Name</p>
+<form method="post">
+    <div class="mt-3">
+        <select id="cliente" class="form-select" aria-label="Default select example" name="Model.venda.idClienteid">
+            <option selected>Selecione o cliente.</option>
+            @foreach (Cliente cliente in Model.cliente)
+            {
+                <option value=@cliente.Id>@cliente.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="mt-3">
+        <select id="produtos" onchange="atualizarValor()" class="mt-3 form-select" aria-label="Default select example" required name="Model.venda.idProdutoid">
+                <option selected>Selecione o produto.</option>
+                @foreach (Produto  produto in Model.produto)
+                {
+                    <option value=@produto.Id >@produto.dscProduto</option>
+                }
+            </select>
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Valor unitário</label>
+        <input type="number" class="form-control" value="" id="valor_unitario" disabled name="Model.venda.vlrUnitário" />
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Quantidade </label>
+        <input type="number" class="form-control" id="quantidade" onchange="valorTotal()" required name="Model.venda.qtdVenda" />
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Valor Total da Venda </label>
+        <input type="number" class="form-control" value="" id="total" disabled name="Model.venda.vlrTotalVenda" />
+    </div>
+    
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+</form>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function atualizarValor() {
+            var selectBox = document.getElementById("produtos");
+            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+            // Faz uma requisição AJAX para buscar o valor do produto selecionado
+            $.ajax({
+                type:"GET",
+                url: "/Produto/Search",
+                dataType: "json",
+                data: { id: selectedValue },
+                success: function(res){
+                    console.log(res.value.vlrUnitário)
+                    let elem = document.getElementById("valor_unitario")
+                    elem.value = res.value.vlrUnitário
+                },
+                error: function(req, status,erro){
+                    console.log(erro)
+                }
+            });
         }
-@foreach (Produto produto in Model.produto)
-        {
-            <p>@produto.dscProduto</p>
+        function valorTotal() {
+            let valorUni = document.getElementById("valor_unitario").value
+            let qtd = document.getElementById("quantidade").value
+            let elem = document.getElementById("total")
+            elem.value = valorUni*qtd
         }
+    </script>
+}
+
+
