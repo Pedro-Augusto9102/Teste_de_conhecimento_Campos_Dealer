@@ -12,8 +12,8 @@ using Teste_de_conhecimento_Campos_Dealer.Data;
 namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 {
     [DbContext(typeof(AppBdContext))]
-    [Migration("20240710180827_Initial migration")]
-    partial class Initialmigration
+    [Migration("20240710225051_Second Migration")]
+    partial class SecondMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,13 +71,13 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("clienteId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("dathVenda")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("idClienteId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("idProdutoId")
+                    b.Property<Guid>("produtoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("qtdVenda")
@@ -91,30 +91,30 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("idClienteId");
+                    b.HasIndex("clienteId");
 
-                    b.HasIndex("idProdutoId");
+                    b.HasIndex("produtoId");
 
                     b.ToTable("Venda");
                 });
 
             modelBuilder.Entity("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Venda", b =>
                 {
-                    b.HasOne("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Cliente", "idCliente")
+                    b.HasOne("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Cliente", "cliente")
                         .WithMany()
-                        .HasForeignKey("idClienteId")
+                        .HasForeignKey("clienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Produto", "idProduto")
+                    b.HasOne("Teste_de_conhecimento_Campos_Dealer.Models.Entities.Produto", "produto")
                         .WithMany()
-                        .HasForeignKey("idProdutoId")
+                        .HasForeignKey("produtoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("idCliente");
+                    b.Navigation("cliente");
 
-                    b.Navigation("idProduto");
+                    b.Navigation("produto");
                 });
 #pragma warning restore 612, 618
         }

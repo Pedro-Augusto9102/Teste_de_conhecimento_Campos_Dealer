@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Teste_de_conhecimento_Campos_Dealer.Data;
 
@@ -11,9 +12,11 @@ using Teste_de_conhecimento_Campos_Dealer.Data;
 namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 {
     [DbContext(typeof(AppBdContext))]
-    partial class AppBdContextModelSnapshot : ModelSnapshot
+    [Migration("20240710232535_Third Migration")]
+    partial class ThirdMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

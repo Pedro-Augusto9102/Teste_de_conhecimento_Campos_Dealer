@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialmigration : Migration
+    public partial class Firstmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,8 +43,8 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    idClienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    idProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    clienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    produtoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     qtdVenda = table.Column<int>(type: "int", nullable: false),
                     vlrUnitarioVenda = table.Column<int>(type: "int", nullable: false),
                     dathVenda = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -54,28 +54,28 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                 {
                     table.PrimaryKey("PK_Venda", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Venda_Clientes_idClienteId",
-                        column: x => x.idClienteId,
+                        name: "FK_Venda_Clientes_clienteId",
+                        column: x => x.clienteId,
                         principalTable: "Clientes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Venda_Produto_idProdutoId",
-                        column: x => x.idProdutoId,
+                        name: "FK_Venda_Produto_produtoId",
+                        column: x => x.produtoId,
                         principalTable: "Produto",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Venda_idClienteId",
+                name: "IX_Venda_clienteId",
                 table: "Venda",
-                column: "idClienteId");
+                column: "clienteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Venda_idProdutoId",
+                name: "IX_Venda_produtoId",
                 table: "Venda",
-                column: "idProdutoId");
+                column: "produtoId");
         }
 
         /// <inheritdoc />

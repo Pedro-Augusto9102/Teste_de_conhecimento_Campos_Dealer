@@ -12,7 +12,7 @@
 <h1>Adicionar Vendas</h1>
 <form method="post">
     <div class="mt-3">
-        <select id="cliente" class="form-select" aria-label="Default select example" name="Model.venda.idClienteid">
+        <select id="cliente" class="form-select" aria-label="Default select example" name="idClienteId">
             <option selected>Selecione o cliente.</option>
             @foreach (Cliente cliente in Model.cliente)
             {
@@ -22,7 +22,7 @@
     </div>
 
     <div class="mt-3">
-        <select id="produtos" onchange="atualizarValor()" class="mt-3 form-select" aria-label="Default select example" required name="Model.venda.idProdutoid">
+        <select id="produtos" onchange="atualizarValor()" class="mt-3 form-select" aria-label="Default select example" required name="idProdutoId">
                 <option selected>Selecione o produto.</option>
                 @foreach (Produto  produto in Model.produto)
                 {
@@ -33,17 +33,17 @@
 
     <div class="mt-3">
         <label class="form-label">Valor unitário</label>
-        <input type="number" class="form-control" value="" id="valor_unitario" disabled name="Model.venda.vlrUnitário" />
+        <input type="hidden" class="form-control" value="" id="valor_unitario" name="vlrUnitarioVenda" />
     </div>
 
     <div class="mt-3">
         <label class="form-label">Quantidade </label>
-        <input type="number" class="form-control" id="quantidade" onchange="valorTotal()" required name="Model.venda.qtdVenda" />
+        <input type="number" class="form-control" id="quantidade" onchange="valorTotal()" required name="qtdVenda" />
     </div>
 
     <div class="mt-3">
         <label class="form-label">Valor Total da Venda </label>
-        <input type="number" class="form-control" value="" id="total" disabled name="Model.venda.vlrTotalVenda" />
+        <input type="hidden" class="form-control" value="" id="total" name="vlrTotalVenda" />
     </div>
     
 

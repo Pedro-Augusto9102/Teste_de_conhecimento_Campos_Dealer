@@ -30,8 +30,9 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
         {
             var venda = new Venda
             {
-                idClienteId = viewModel.idClienteId,
-                idProdutoId = viewModel.idProdutoId,
+                Id = Guid.NewGuid(),
+                clienteId = viewModel.idClienteId,
+                produtoId = viewModel.idProdutoId,
                 qtdVenda = viewModel.qtdVenda,
                 vlrUnitarioVenda = viewModel.vlrUnitarioVenda,
                 dathVenda = DateTime.Now,
@@ -39,7 +40,7 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
             };
             await bdContext.Venda.AddAsync(venda);
             await bdContext.SaveChangesAsync();
-            return View();
+            return RedirectToAction("List", "Cliente");
         }
     }
 }

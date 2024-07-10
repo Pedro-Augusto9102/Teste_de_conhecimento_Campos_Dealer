@@ -12,8 +12,8 @@ using Teste_de_conhecimento_Campos_Dealer.Data;
 namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 {
     [DbContext(typeof(AppBdContext))]
-    [Migration("20240710193825_Second migration")]
-    partial class Secondmigration
+    [Migration("20240710222741_First migration")]
+    partial class Firstmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,12 +76,6 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 
                     b.Property<DateTime>("dathVenda")
                         .HasColumnType("datetime2");
-
-                    b.Property<Guid>("idClienteId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("idProdutoId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("produtoId")
                         .HasColumnType("uniqueidentifier");

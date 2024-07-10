@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppBdContext>(options => 
-options.UseSqlServer(builder.Configuration.GetConnectionString("StudentPortal")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("CamposDealer")));
 
 var app = builder.Build();
 
