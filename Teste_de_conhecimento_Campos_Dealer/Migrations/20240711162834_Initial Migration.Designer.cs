@@ -12,7 +12,7 @@ using Teste_de_conhecimento_Campos_Dealer.Data;
 namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 {
     [DbContext(typeof(AppBdContext))]
-    [Migration("20240711125051_Initial Migration")]
+    [Migration("20240711162834_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

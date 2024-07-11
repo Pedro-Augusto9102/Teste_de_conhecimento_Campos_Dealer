@@ -3,6 +3,7 @@ using Teste_de_conhecimento_Campos_Dealer.Data;
 using Teste_de_conhecimento_Campos_Dealer.Models.Entities;
 using Teste_de_conhecimento_Campos_Dealer.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace Teste_de_conhecimento_Campos_Dealer.Controllers
 {
@@ -21,6 +22,7 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddProdutoViewModel viewModel)
         {
+            
             var produto = new Produto
             {
                 dscProduto = viewModel.dscProduto,

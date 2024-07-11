@@ -48,7 +48,13 @@
     
 
     <div class="mt-3">
-        <button type="submit" class="btn btn-primary">Salvar</button>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 id="card-valor-total" class="card-title">Valor Total: R$ 0</h5>
+                <p id="card-valor-unitario" class="card-text">Valor unitário: R$ 0</p>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
     </div>
 </form>
 @section Scripts {
@@ -66,6 +72,8 @@
                 success: function(res){
                     console.log(res.value.vlrUnitário)
                     let elem = document.getElementById("valor_unitario")
+                    let card = document.getElementById("card-valor-unitario")
+                    card.innerText = `Valor unitário: R$ ${res.value.vlrUnitário}`
                     elem.value = res.value.vlrUnitário
                 },
                 error: function(req, status,erro){
@@ -77,6 +85,8 @@
             let valorUni = document.getElementById("valor_unitario").value
             let qtd = document.getElementById("quantidade").value
             let elem = document.getElementById("total")
+            let card = document.getElementById("card-valor-total")
+            card.innerHTML = `Valor Total: R$ ${valorUni*qtd}`
             elem.value = valorUni*qtd
         }
     </script>

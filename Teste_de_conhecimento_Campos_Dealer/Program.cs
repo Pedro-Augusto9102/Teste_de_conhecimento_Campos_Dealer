@@ -4,10 +4,19 @@ using Teste_de_conhecimento_Campos_Dealer.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+
+// Configuração do serviço de HttpClient para chamadas de API
+builder.Services.AddScoped<IApiService, ApiService>();
 
 builder.Services.AddDbContext<AppBdContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("CamposDealer")));
+// Configuração do serviço de HttpClient para chamadas de API
+builder.Services.AddScoped<HttpClient>();
+builder.Services.AddScoped<IApiService, ApiService>();
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<AppBdContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -21,6 +30,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseRouting();
 
@@ -29,5 +41,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+//DataInitializer.Initialize(app.Services).Wait();
 
 app.Run();
