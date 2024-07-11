@@ -42,5 +42,16 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
             await bdContext.SaveChangesAsync();
             return RedirectToAction("List", "Cliente");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> List()
+        {
+            var vendas = bdContext.Venda
+                .Include(x => x.produto)
+                .Include(x => x.cliente)
+                .ToList();
+        
+            return View(vendas);
+        }
     }
 }

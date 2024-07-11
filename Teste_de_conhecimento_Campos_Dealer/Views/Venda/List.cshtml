@@ -3,3 +3,26 @@
 *@
 @{
 }
+@model List<Teste_de_conhecimento_Campos_Dealer.Models.Entities.Venda>
+
+
+<div class="row">
+    @foreach (var venda in Model)
+    {
+        <div class="col-sm-6 mt-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">ID da venda: @venda.Id</h5>
+                    <p class="card-text">Cliente @venda.cliente.Name (ID: @venda.clienteId)</p>
+                    <p class="card-text">Produdo @venda.produto.dscProduto</p>
+                    <p class="card-text">Valor unitário @venda.produto.vlrUnitário</p>
+                    <p class="card-text">Valor total: @venda.vlrTotalVenda</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
