@@ -12,8 +12,8 @@ using Teste_de_conhecimento_Campos_Dealer.Data;
 namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 {
     [DbContext(typeof(AppBdContext))]
-    [Migration("20240710225051_Second Migration")]
-    partial class SecondMigration
+    [Migration("20240711125051_Initial Migration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,8 +83,8 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                     b.Property<int>("qtdVenda")
                         .HasColumnType("int");
 
-                    b.Property<float>("vlrTotalVenda")
-                        .HasColumnType("real");
+                    b.Property<int>("vlrTotalVenda")
+                        .HasColumnType("int");
 
                     b.Property<int>("vlrUnitarioVenda")
                         .HasColumnType("int");

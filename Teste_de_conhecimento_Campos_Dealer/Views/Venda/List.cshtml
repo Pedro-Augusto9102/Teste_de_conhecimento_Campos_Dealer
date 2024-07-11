@@ -17,7 +17,8 @@
                     <p class="card-text">Produdo @venda.produto.dscProduto</p>
                     <p class="card-text">Valor unitário @venda.produto.vlrUnitário</p>
                     <p class="card-text">Valor total: @venda.vlrTotalVenda</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <p class="card-text">Data @venda.dathVenda</p>
+                    <a class="btn btn-primary" asp-controller="Venda" asp-action="Edit" asp-route-id="@venda.Id">Edit</a>
                 </div>
             </div>
         </div>

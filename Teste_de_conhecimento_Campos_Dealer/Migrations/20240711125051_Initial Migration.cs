@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 {
     /// <inheritdoc />
-    public partial class Firstmigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,7 +48,7 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                     qtdVenda = table.Column<int>(type: "int", nullable: false),
                     vlrUnitarioVenda = table.Column<int>(type: "int", nullable: false),
                     dathVenda = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    vlrTotalVenda = table.Column<float>(type: "real", nullable: false)
+                    vlrTotalVenda = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
