@@ -16,16 +16,13 @@
                 <input type="hidden" class="form-control" value=@venda.Id name="Id" readonly />
             }
 
-            <select id="cliente" class="form-select" aria-label="Default select example" name="idClienteId">
+            <select id="cliente" class="form-select" aria-label="Default select example" name="idClienteId" required>
                 @foreach (Venda venda in Model.venda)
                 {
                     <option value=@venda.cliente.Id selected>@venda.cliente.Name</option>
                 }
 
-                @foreach (Cliente cliente in Model.cliente)
-                {
-                    <option value=@cliente.Id>@cliente.Name</option>
-                }
+                
             </select>
         </div>
 
@@ -46,7 +43,7 @@
             <label class="form-label">Valor unitário</label>
             @foreach (Venda venda in Model.venda)
             {
-                <input type="text" class="form-control" value=@venda.vlrUnitarioVenda id="valor_unitario" name="vlrUnitarioVenda" />
+                <input hidden type="text" class="form-control" value=@venda.vlrUnitarioVenda id="valor_unitario" name="vlrUnitarioVenda" required />
             }
 
         </div>
@@ -64,7 +61,7 @@
             <label class="form-label">Valor Total da Venda </label>
             @foreach (Venda venda in Model.venda)
             {
-                <input type="text" class="form-control" value=@venda.vlrTotalVenda id="total" name="vlrTotalVenda" placeholder="R$0.00" oninput="formatCurrency(this)" />
+                <input hidden type="text" class="form-control" value=@venda.vlrTotalVenda id="total" name="vlrTotalVenda" placeholder="R$0.00" oninput="formatCurrency(this)" required/>
             }
 
         </div>
@@ -108,15 +105,42 @@
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').trigger('focus')
         })
+        function atualizarValor() {
+            var selectBox = document.getElementById("produtos");
+            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+            // Faz uma requisição AJAX para buscar o valor do produto selecionado
+            $.ajax({
+                type: "GET",
+                url: "/Produto/Search",
+                dataType: "json",
+                data: { id: selectedValue },
+                success: function (res) {
+                    console.log(res.value.vlrUnitário)
+                    let elem = document.getElementById("valor_unitario")
+                    let card = document.getElementById("card-valor-unitario")
+                    card.innerText = `Valor unitário: R$ ${res.value.vlrUnitário}`
+                    elem.value = res.value.vlrUnitário
+                },
+                error: function (req, status, erro) {
+                    console.log(erro)
+                }
+            });
+        }
         function valorTotal() {
+
             let valorUni = document.getElementById("valor_unitario").value.replace(",", '.')
             document.getElementById("card-valor-unitario").innerHTML = valorUni
-            let qtd = document.getElementById("quantidade").value.replace(",", '.')
+            let qtd = document.getElementById("quantidade").value
+            let total = Number(valorUni) * Number(qtd)
+
+            // Formatar o valor total para exibição
+            let valorFormatado = total.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, '$1.')
+
             let elem = document.getElementById("total")
             let cardTotal = document.getElementById("card-valor-total")
-            let valor = elem.value.replace(/\D/g, '')
-            valor = Number(valor / 100).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+,)/g, '$1.');
-            elem.value = 'R$ ' + Number(valorUni) * Number(qtd)
+
+            // Atualizar os elementos DOM com o valor formatado
+            elem.value = 'R$ ' + valorFormatado
             cardTotal.innerText = elem.value
         }
     </script>

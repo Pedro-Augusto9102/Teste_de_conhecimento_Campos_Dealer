@@ -28,10 +28,10 @@ public static class DataInitializer
 
         var produtos = new Produto[]
         {
-            new Produto { dscProduto = "Cli1", vlrUnitário = 5,},
-            new Produto { dscProduto = "Cli2", vlrUnitário = 10,},
-            new Produto { dscProduto = "Cli3", vlrUnitário = 15},
-            new Produto { dscProduto = "Cli4", vlrUnitário = 20},
+            new Produto { dscProduto = "Produto 1", vlrUnitário = 5,},
+            new Produto { dscProduto = "Produto 2", vlrUnitário = 10,},
+            new Produto { dscProduto = "Produto 3", vlrUnitário = 15},
+            new Produto { dscProduto = "Produto 4", vlrUnitário = 20},
         };
 
         foreach (Produto p in produtos)
@@ -42,13 +42,13 @@ public static class DataInitializer
 
         var vendas = new Venda[]
         {
-            new Venda { clienteId = clientes[0].Id, produtoId = produtos[0].Id, qtdVenda = 5, vlrUnitarioVenda = 5, vlrTotalVenda = 25},
-            new Venda { clienteId = clientes[0].Id, produtoId = produtos[1].Id, qtdVenda = 1, vlrUnitarioVenda = 10, vlrTotalVenda = 10},
-            new Venda { clienteId = clientes[0].Id, produtoId = produtos[2].Id, qtdVenda = 1, vlrUnitarioVenda = 15, vlrTotalVenda = 15},
-            new Venda { clienteId = clientes[1].Id, produtoId = produtos[0].Id, qtdVenda = 5, vlrUnitarioVenda = 5, vlrTotalVenda = 25},
-            new Venda { clienteId = clientes[1].Id, produtoId = produtos[1].Id, qtdVenda = 1, vlrUnitarioVenda = 10, vlrTotalVenda = 10},
-            new Venda { clienteId = clientes[2].Id, produtoId = produtos[0].Id, qtdVenda = 10, vlrUnitarioVenda = 6, vlrTotalVenda = 60},
-            new Venda { clienteId = clientes[2].Id, produtoId = produtos[2].Id, qtdVenda = 2, vlrUnitarioVenda = 15, vlrTotalVenda = 30},
+            new Venda { clienteId = clientes[0].Id, produtoId = produtos[0].Id, qtdVenda = 5, vlrUnitarioVenda = 5.00F, vlrTotalVenda = 25.00F},
+            new Venda { clienteId = clientes[0].Id, produtoId = produtos[1].Id, qtdVenda = 1, vlrUnitarioVenda = 10.00F, vlrTotalVenda = 10.00F},
+            new Venda { clienteId = clientes[0].Id, produtoId = produtos[2].Id, qtdVenda = 1, vlrUnitarioVenda = 15.00F, vlrTotalVenda = 15.00F},
+            new Venda { clienteId = clientes[1].Id, produtoId = produtos[0].Id, qtdVenda = 5, vlrUnitarioVenda = 5.00F, vlrTotalVenda = 25.00F},
+            new Venda { clienteId = clientes[1].Id, produtoId = produtos[1].Id, qtdVenda = 1, vlrUnitarioVenda = 10.00F, vlrTotalVenda = 10.00F},
+            new Venda { clienteId = clientes[2].Id, produtoId = produtos[0].Id, qtdVenda = 10, vlrUnitarioVenda = 6.00F, vlrTotalVenda = 60.00F},
+            new Venda { clienteId = clientes[2].Id, produtoId = produtos[2].Id, qtdVenda = 2, vlrUnitarioVenda = 15.00F, vlrTotalVenda = 30.00F},
         };        
         
         foreach (Venda v in vendas)

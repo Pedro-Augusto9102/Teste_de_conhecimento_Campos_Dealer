@@ -61,7 +61,7 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
             };
             await bdContext.Venda.AddAsync(venda);
             await bdContext.SaveChangesAsync();
-            return RedirectToAction("List", "Cliente");
+            return RedirectToAction("List", "Venda");
         }
 
         [HttpGet]
