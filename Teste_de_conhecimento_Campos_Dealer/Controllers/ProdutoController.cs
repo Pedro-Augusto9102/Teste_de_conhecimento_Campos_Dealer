@@ -9,6 +9,25 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
 {
     public class ProdutoController : Controller
     {
+        public float ConverterValorMonetarioParaFloat(string valorMonetario)
+        {
+            // Remove caracteres não numéricos
+            string valorLimpo = valorMonetario
+                .Replace("R$", "")
+                .Replace(".", "")
+                .Replace(",", "")
+                .Trim(); // Remove espaços em branco extras, se houver
+
+            // Converte para float
+            if (float.TryParse(valorLimpo, out float valorConvertido))
+            {
+                return valorConvertido / 100; // Divide por 100 se o valor estiver em centavos
+            }
+            else
+            {
+                throw new ArgumentException("Valor monetário inválido.");
+            }
+        }
         private readonly AppBdContext bdContext;
         public ProdutoController(AppBdContext bdContext)
         {
@@ -22,16 +41,18 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddProdutoViewModel viewModel)
         {
-            
+            float valorFloat = ConverterValorMonetarioParaFloat(viewModel.vlrUnitário);
             var produto = new Produto
             {
                 dscProduto = viewModel.dscProduto,
-                vlrUnitário = viewModel.vlrUnitário,
+                vlrUnitário = valorFloat,
             };
             await bdContext.Produto.AddAsync(produto);
             await bdContext.SaveChangesAsync();
-            return View();
+            TempData["AlertMessage"] = "Operação realizada com Sucesso";
+            return RedirectToAction("List", "Produto");
         }
+
 
         [HttpGet]
         public async Task<IActionResult> List()
@@ -50,7 +71,7 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
             {
                 return new JsonResult(Ok(produto));
             }
-            return RedirectToAction("List", "Cliente");
+            return RedirectToAction("List", "Produto");
         }
 
         [HttpGet]
@@ -61,15 +82,17 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Produto viewModel)
+        public async Task<IActionResult> Edit(AddProdutoViewModel viewModel)
         {
+            float valorFloat = ConverterValorMonetarioParaFloat(viewModel.vlrUnitário);
             var produto = await bdContext.Produto.FindAsync(viewModel.Id);
             if (produto is not null)
             {
                 produto.dscProduto = viewModel.dscProduto;
-                produto.vlrUnitário = viewModel.vlrUnitário;
+                produto.vlrUnitário = valorFloat;
                 await bdContext.SaveChangesAsync();
             }
+            TempData["AlertMessage"] = "Operação realizada com Sucesso";
             return RedirectToAction("List", "Produto");
         }
 

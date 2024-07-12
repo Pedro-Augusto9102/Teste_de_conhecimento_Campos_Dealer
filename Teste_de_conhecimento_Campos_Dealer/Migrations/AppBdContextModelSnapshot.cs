@@ -36,9 +36,6 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("dathVenda")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
                     b.ToTable("Clientes");
@@ -80,11 +77,11 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                     b.Property<int>("qtdVenda")
                         .HasColumnType("int");
 
-                    b.Property<int>("vlrTotalVenda")
-                        .HasColumnType("int");
+                    b.Property<float>("vlrTotalVenda")
+                        .HasColumnType("real");
 
-                    b.Property<int>("vlrUnitarioVenda")
-                        .HasColumnType("int");
+                    b.Property<float>("vlrUnitarioVenda")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 

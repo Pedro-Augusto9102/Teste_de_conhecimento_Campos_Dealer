@@ -8,8 +8,8 @@
         public Guid produtoId { get; set; }
         public Produto produto { get; set; }
         public int qtdVenda { get; set; }
-        public int vlrUnitarioVenda { get; set; }
+        public float vlrUnitarioVenda { get; set; }
         public DateTime dathVenda { get; set; }
-        public int vlrTotalVenda { get; set; }
+        public float vlrTotalVenda { get; set; }
     }
 }

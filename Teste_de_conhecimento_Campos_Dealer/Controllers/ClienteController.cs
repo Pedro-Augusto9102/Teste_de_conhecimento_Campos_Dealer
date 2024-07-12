@@ -30,7 +30,8 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
             };
             await bdContext.Clientes.AddAsync(cliente);
             await bdContext.SaveChangesAsync();
-            return View();
+            TempData["AlertMessage"] = "Operação realizada com Sucesso";        
+            return RedirectToAction("List", "Cliente");
         }
 
         [HttpGet]
@@ -50,13 +51,15 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Cliente viewModel)
         {
-            var student = await bdContext.Clientes.FindAsync(viewModel.Id);
-            if(student is not null)
+            var cliente = await bdContext.Clientes.FindAsync(viewModel.Id);
+            if(cliente is not null)
             {
-                student.Name = viewModel.Name;
-                student.City = viewModel.City;
+                cliente.Name = viewModel.Name;
+                cliente.City = viewModel.City;
                 await bdContext.SaveChangesAsync();
+                TempData["AlertMessage"] = "Operação realizada com Sucesso";
             }
+            
             return RedirectToAction("List", "Cliente");
         }
 

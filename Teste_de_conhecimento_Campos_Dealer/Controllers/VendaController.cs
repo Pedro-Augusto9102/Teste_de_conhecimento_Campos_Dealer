@@ -9,6 +9,25 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
 {
     public class VendaController : Controller
     {
+        public float ConverterValorMonetarioParaFloat(string valorMonetario)
+        {
+            // Remove caracteres não numéricos
+            string valorLimpo = valorMonetario
+                .Replace("R$", "")
+                .Replace(".", "")
+                .Replace(",", "")
+                .Trim(); // Remove espaços em branco extras, se houver
+
+            // Converte para float
+            if (float.TryParse(valorLimpo, out float valorConvertido))
+            {
+                return valorConvertido / 100; // Divide por 100 se o valor estiver em centavos
+            }
+            else
+            {
+                throw new ArgumentException("Valor monetário inválido.");
+            }
+        }
         private readonly AppBdContext bdContext;
         public VendaController(AppBdContext bdContext)
         {
@@ -28,15 +47,17 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddVendaViewModel viewModel)
         {
+            float valorTotalFloat = ConverterValorMonetarioParaFloat(viewModel.vlrTotalVenda);
+            float valorFloat = ConverterValorMonetarioParaFloat(viewModel.vlrUnitarioVenda);
             var venda = new Venda
             {
                 Id = Guid.NewGuid(),
                 clienteId = viewModel.idClienteId,
                 produtoId = viewModel.idProdutoId,
                 qtdVenda = viewModel.qtdVenda,
-                vlrUnitarioVenda = viewModel.vlrUnitarioVenda,
+                vlrUnitarioVenda = valorFloat,
                 dathVenda = DateTime.Now,
-                vlrTotalVenda = viewModel.vlrTotalVenda,
+                vlrTotalVenda = valorTotalFloat,
             };
             await bdContext.Venda.AddAsync(venda);
             await bdContext.SaveChangesAsync();
@@ -70,19 +91,22 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Venda viewModel)
+        public async Task<IActionResult> Edit(AddVendaViewModel viewModel)
         {
+            float valorTotalFloat = ConverterValorMonetarioParaFloat(viewModel.vlrTotalVenda);
+            float valorFloat = ConverterValorMonetarioParaFloat(viewModel.vlrUnitarioVenda);
             var venda = await bdContext.Venda.FindAsync(viewModel.Id);
             if (venda is not null)
             {
-                venda.clienteId = viewModel.clienteId;
-                venda.produtoId = viewModel.produtoId;
+                venda.clienteId = viewModel.idClienteId;
+                venda.produtoId = viewModel.idProdutoId;
                 venda.qtdVenda = viewModel.qtdVenda;
-                venda.vlrUnitarioVenda = viewModel.vlrUnitarioVenda;
+                venda.vlrUnitarioVenda = valorFloat;
                 venda.dathVenda = DateTime.Now;
-                venda.vlrTotalVenda = viewModel.vlrTotalVenda;
+                venda.vlrTotalVenda = valorTotalFloat;
                 await bdContext.SaveChangesAsync();
             }
+            TempData["AlertMessage"] = "Operação realizada com Sucesso";
             return RedirectToAction("List", "Venda");
         }
 
@@ -97,7 +121,8 @@ namespace Teste_de_conhecimento_Campos_Dealer.Controllers
                 await bdContext.SaveChangesAsync();
                 TempData["AlertMessage"] = "Operação realizada com Sucesso";
             }
-            return RedirectToAction("List", "Cliente");
+            TempData["AlertMessage"] = "Operação realizada com Sucesso";
+            return RedirectToAction("List", "Venda");
         }
     }
 

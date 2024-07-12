@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,8 +17,7 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    dathVenda = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,9 +45,9 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                     clienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     produtoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     qtdVenda = table.Column<int>(type: "int", nullable: false),
-                    vlrUnitarioVenda = table.Column<int>(type: "int", nullable: false),
+                    vlrUnitarioVenda = table.Column<float>(type: "real", nullable: false),
                     dathVenda = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    vlrTotalVenda = table.Column<int>(type: "int", nullable: false)
+                    vlrTotalVenda = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {

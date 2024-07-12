@@ -2,7 +2,8 @@
 {
     public class AddProdutoViewModel
     {
+        public Guid Id { get; set; }
         public string dscProduto { get; set; }
-        public float vlrUnitário { get; set; }
+        public string vlrUnitário { get; set; }
     }
 }

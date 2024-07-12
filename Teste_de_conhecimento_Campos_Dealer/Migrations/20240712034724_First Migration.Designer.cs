@@ -12,8 +12,8 @@ using Teste_de_conhecimento_Campos_Dealer.Data;
 namespace Teste_de_conhecimento_Campos_Dealer.Migrations
 {
     [DbContext(typeof(AppBdContext))]
-    [Migration("20240711162834_Initial Migration")]
-    partial class InitialMigration
+    [Migration("20240712034724_First Migration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,9 +38,6 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("dathVenda")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -83,11 +80,11 @@ namespace Teste_de_conhecimento_Campos_Dealer.Migrations
                     b.Property<int>("qtdVenda")
                         .HasColumnType("int");
 
-                    b.Property<int>("vlrTotalVenda")
-                        .HasColumnType("int");
+                    b.Property<float>("vlrTotalVenda")
+                        .HasColumnType("real");
 
-                    b.Property<int>("vlrUnitarioVenda")
-                        .HasColumnType("int");
+                    b.Property<float>("vlrUnitarioVenda")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 

@@ -8,56 +8,56 @@
 
 @model dynamic
 
-
-<h1>Adicionar Vendas</h1>
-<form method="post">
-    <div class="mt-3">
-        <select id="cliente" class="form-select" aria-label="Default select example" name="idClienteId">
-            <option selected>Selecione o cliente.</option>
-            @foreach (Cliente cliente in Model.cliente)
-            {
-                <option value=@cliente.Id>@cliente.Name</option>
-            }
-        </select>
-    </div>
-
-    <div class="mt-3">
-        <select id="produtos" onchange="atualizarValor()" class="mt-3 form-select" aria-label="Default select example" required name="idProdutoId">
-                <option selected>Selecione o produto.</option>
-                @foreach (Produto  produto in Model.produto)
+<h1>Adicionar Venda</h1>
+@if(Model.cliente.Count > 0 && Model.produto.Count > 0){
+    <form method="post">
+        <div class="mt-3">
+            <select id="cliente" class="form-select" aria-label="Default select example" name="idClienteId">
+                <option selected>Selecione o cliente.</option>
+                @foreach (Cliente cliente in Model.cliente)
                 {
-                    <option value=@produto.Id >@produto.dscProduto</option>
+                    <option value=@cliente.Id>@cliente.Name</option>
                 }
             </select>
-    </div>
+        </div>
 
-    <div class="mt-3">
-        <label class="form-label">Valor unitário</label>
-        <input type="hidden" class="form-control" value="" id="valor_unitario" name="vlrUnitarioVenda" />
-    </div>
+        <div class="mt-3">
+            <select id="produtos" onchange="atualizarValor()" class="mt-3 form-select" aria-label="Default select example" required name="idProdutoId">
+                <option selected>Selecione o produto.</option>
+                @foreach (Produto produto in Model.produto)
+                {
+                    <option value=@produto.Id>@produto.dscProduto</option>
+                }
+            </select>
+        </div>
 
-    <div class="mt-3">
-        <label class="form-label">Quantidade </label>
-        <input type="number" class="form-control" id="quantidade" onchange="valorTotal()" required name="qtdVenda" />
-    </div>
+        <div class="mt-3">
+            <label class="form-label">Valor unitário</label>
+            <input type="hidden" class="form-control" value="" id="valor_unitario" name="vlrUnitarioVenda" />
+        </div>
 
-    <div class="mt-3">
-        <label class="form-label">Valor Total da Venda </label>
-        <input type="hidden" class="form-control" value="" id="total" name="vlrTotalVenda" />
-    </div>
-    
+        <div class="mt-3">
+            <label class="form-label">Quantidade </label>
+            <input type="number" class="form-control" id="quantidade" onchange="valorTotal()" required name="qtdVenda" />
+        </div>
 
-    <div class="mt-3">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 id="card-valor-total" class="card-title">Valor Total: R$ 0</h5>
-                <p id="card-valor-unitario" class="card-text">Valor unitário: R$ 0</p>
-                <button type="submit" class="btn btn-primary">Salvar</button>
+        <div class="mt-3">
+            <label class="form-label">Valor Total da Venda </label>
+            <input type="hidden" class="form-control" value="" id="total" name="vlrTotalVenda" />
+        </div>
+
+
+        <div class="mt-3">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 id="card-valor-total" class="card-title">Valor Total: R$ 0</h5>
+                    <p id="card-valor-unitario" class="card-text">Valor unitário: R$ 0</p>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
             </div>
         </div>
-    </div>
-</form>
-@section Scripts {
+    </form>
+    @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function atualizarValor() {
@@ -65,18 +65,18 @@
             var selectedValue = selectBox.options[selectBox.selectedIndex].value;
             // Faz uma requisição AJAX para buscar o valor do produto selecionado
             $.ajax({
-                type:"GET",
+                type: "GET",
                 url: "/Produto/Search",
                 dataType: "json",
                 data: { id: selectedValue },
-                success: function(res){
+                success: function (res) {
                     console.log(res.value.vlrUnitário)
                     let elem = document.getElementById("valor_unitario")
                     let card = document.getElementById("card-valor-unitario")
                     card.innerText = `Valor unitário: R$ ${res.value.vlrUnitário}`
                     elem.value = res.value.vlrUnitário
                 },
-                error: function(req, status,erro){
+                error: function (req, status, erro) {
                     console.log(erro)
                 }
             });
@@ -86,10 +86,16 @@
             let qtd = document.getElementById("quantidade").value
             let elem = document.getElementById("total")
             let card = document.getElementById("card-valor-total")
-            card.innerHTML = `Valor Total: R$ ${valorUni*qtd}`
-            elem.value = valorUni*qtd
+            card.innerHTML = `Valor Total: R$ ${valorUni * qtd}`
+            elem.value = valorUni * qtd
         }
     </script>
+    }
 }
+else
+{
+    <h1>Para adicionar uma venda é necessário ter um cliente e um produto cadastrado.</h1>
+}
+
 
 

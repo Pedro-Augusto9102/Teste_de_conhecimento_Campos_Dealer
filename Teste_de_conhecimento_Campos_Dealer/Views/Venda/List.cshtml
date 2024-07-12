@@ -4,7 +4,13 @@
 @{
 }
 @model List<Teste_de_conhecimento_Campos_Dealer.Models.Entities.Venda>
-
+<h1>Vendas</h1>
+@if (TempData["AlertMessage"] is not null)
+{
+    <div class="alert alert-success">
+        <strong>Sucesso! </strong>@TempData["AlertMessage"]
+    </div>
+}
 
 <div class="row">
     @foreach (var venda in Model)
@@ -15,10 +21,10 @@
                     <h5 class="card-title">ID da venda: @venda.Id</h5>
                     <p class="card-text">Cliente @venda.cliente.Name (ID: @venda.clienteId)</p>
                     <p class="card-text">Produdo @venda.produto.dscProduto</p>
-                    <p class="card-text">Valor unitário @venda.produto.vlrUnitário</p>
-                    <p class="card-text">Valor total: @venda.vlrTotalVenda</p>
+                    <p class="card-text">Valor unitário R$ @venda.produto.vlrUnitário</p>
+                    <p class="card-text">Valor total: R$ @venda.vlrTotalVenda</p>
                     <p class="card-text">Data @venda.dathVenda</p>
-                    <a class="btn btn-primary" asp-controller="Venda" asp-action="Edit" asp-route-id="@venda.Id">Edit</a>
+                    <a class="btn btn-primary" asp-controller="Venda" asp-action="Edit" asp-route-id="@venda.Id">Editar</a>
                 </div>
             </div>
         </div>

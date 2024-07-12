@@ -4,6 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Teste_de_conhecimento_Campos_Dealer</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery (necessário para os plugins JavaScript do Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Teste_de_conhecimento_Campos_Dealer.styles.css" asp-append-version="true" />
@@ -25,11 +34,44 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                       
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Add">Adicionar Clientes</a>
+                            <div class="dropdown show ml-5">
+                                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Clientes
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="Add">Adicionar Clientes</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="List">Listar Clientes</a>
+                                </div>
+                            </div>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cliente" asp-action="List">Listar Clientes</a>
+                            <div class="dropdown show ml-5">
+                                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Produtos
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="Add">Adicionar Produtos</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="List">Listar Produtos</a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <div class="dropdown show ml-5">
+                                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Vendas
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Venda" asp-action="Add">Adicionar Vendas</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Venda" asp-action="List">Listar Vendas</a>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -47,6 +89,7 @@
             &copy; 2024 - Teste_de_conhecimento_Campos_Dealer - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

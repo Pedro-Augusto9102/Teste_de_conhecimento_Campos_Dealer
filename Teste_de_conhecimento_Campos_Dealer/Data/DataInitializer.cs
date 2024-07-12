@@ -3,7 +3,63 @@ using Teste_de_conhecimento_Campos_Dealer.Models.Entities;
 
 public static class DataInitializer
 {
-    public static async Task Initialize(IServiceProvider serviceProvider)
+    public static void Initialize(AppBdContext bdContext)
+    {
+        bdContext.Database.EnsureCreated();
+
+        // Verifique se já existem clientes no banco de dados
+        if (bdContext.Clientes.Any() || bdContext.Produto.Any() || bdContext.Venda.Any())
+        {
+            return; // O banco de dados já foi populado
+        }
+
+        var clientes = new Cliente[]
+        {
+            new Cliente { Name = "Cli1", City = "Cidade1",},
+            new Cliente { Name = "Cli2", City = "Cidade2",},
+            new Cliente { Name = "Cli3", City = "Cidade3"},
+            new Cliente { Name = "Cli4", City = "Cidade4"},
+        };
+        foreach (Cliente c in clientes)
+        {
+            bdContext.Clientes.AddAsync(c);
+            bdContext.SaveChanges();
+        }
+
+        var produtos = new Produto[]
+        {
+            new Produto { dscProduto = "Cli1", vlrUnitário = 5,},
+            new Produto { dscProduto = "Cli2", vlrUnitário = 10,},
+            new Produto { dscProduto = "Cli3", vlrUnitário = 15},
+            new Produto { dscProduto = "Cli4", vlrUnitário = 20},
+        };
+
+        foreach (Produto p in produtos)
+        {
+            bdContext.Produto.AddAsync(p);
+            bdContext.SaveChanges();
+        }
+
+        var vendas = new Venda[]
+        {
+            new Venda { clienteId = clientes[0].Id, produtoId = produtos[0].Id, qtdVenda = 5, vlrUnitarioVenda = 5, vlrTotalVenda = 25},
+            new Venda { clienteId = clientes[0].Id, produtoId = produtos[1].Id, qtdVenda = 1, vlrUnitarioVenda = 10, vlrTotalVenda = 10},
+            new Venda { clienteId = clientes[0].Id, produtoId = produtos[2].Id, qtdVenda = 1, vlrUnitarioVenda = 15, vlrTotalVenda = 15},
+            new Venda { clienteId = clientes[1].Id, produtoId = produtos[0].Id, qtdVenda = 5, vlrUnitarioVenda = 5, vlrTotalVenda = 25},
+            new Venda { clienteId = clientes[1].Id, produtoId = produtos[1].Id, qtdVenda = 1, vlrUnitarioVenda = 10, vlrTotalVenda = 10},
+            new Venda { clienteId = clientes[2].Id, produtoId = produtos[0].Id, qtdVenda = 10, vlrUnitarioVenda = 6, vlrTotalVenda = 60},
+            new Venda { clienteId = clientes[2].Id, produtoId = produtos[2].Id, qtdVenda = 2, vlrUnitarioVenda = 15, vlrTotalVenda = 30},
+        };        
+        
+        foreach (Venda v in vendas)
+        {
+            bdContext.Venda.AddAsync(v);
+            bdContext.SaveChanges();
+        }
+
+    }
+}
+/*    public static async Task Initialize(IServiceProvider serviceProvider)
     {
         using var scope = serviceProvider.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<AppBdContext>();
@@ -56,4 +112,4 @@ public static class DataInitializer
         await context.SaveChangesAsync();
     
      }
-}
+}*/
