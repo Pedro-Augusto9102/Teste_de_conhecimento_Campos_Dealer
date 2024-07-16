@@ -12,4 +12,4 @@ Update-Database
 
 Agora Basta executar a aplicação.
 
-Aplicação desenvolvida com: .Net Core MVC, Entity Framework, Microsoft SQL Server e BootStrap.
+Aplicação desenvolvida com: .Net Core MVC, Entity Framework, Microsoft SQL Server e Bootstrap.
